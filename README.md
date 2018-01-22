@@ -5,7 +5,7 @@ Esta aplicación a su vez tendrá un top donde aparecerán los usuarios con mayo
 
 *Parte publica*: El usuario podrá únicamente ver las noticias sin necesidad de registrarse.
  
-*Parte privada*: Una vez registrado el usuario podrá entrar al apartado de montajes para subir el suyo propio o ver el de los demás usuarios. Dentro de cada montaje el usuario puede valorarlo o hacer un comentario. Un usuario registrado tendrá la posibilidad de editar su perfil (Cambiar nombre de usuario, contraseña… etc.
+*Parte privada*: Una vez registrado el usuario podrá entrar al apartado de montajes para subir el suyo propio o ver el de los demás usuarios. Dentro de cada montaje el usuario puede valorarlo o hacer un comentario. Un usuario registrado tendrá la posibilidad de editar su perfil (Cambiar nombre de usuario, contraseña… etc).
 
  **Entidades**
  
@@ -15,7 +15,7 @@ Esta aplicación a su vez tendrá un top donde aparecerán los usuarios con mayo
 * Valoración: Valorar un montaje con una nota el montaje de un usuario.
 * Comentario: Poner un comentario al montaje de un usuario.
 * Seguir usuario: Un usuario puede seguir a otro para que le lleguen notificaciones de las publicaciones del usuario. 
-
+* Noticia: Noticias sobre componentes Hardware. 
 
 **Miembros del equipo:**
 
