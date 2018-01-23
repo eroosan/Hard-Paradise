@@ -17,6 +17,10 @@ Esta aplicación a su vez tendrá un top donde aparecerán los usuarios con mayo
 * Seguir usuario: Un usuario puede seguir a otro para que le lleguen notificaciones de las publicaciones del usuario. 
 * Noticia: Noticias sobre componentes Hardware. 
 
+**Servicio interno**
+
+Se llevará a cabo a través de un sistema de correos que avisará de notificaciones como la activación de la cuenta o interacciones con otros usuarios.
+
 **Miembros del equipo:**
 
 * Nombre completo: Gabriel Eiraldi Zoff
