@@ -1,4 +1,4 @@
-# Hard-Paradise
+﻿# Hard-Paradise
 
 El proyecto Hard-Paradise consiste en una aplicación web, que consistirá en subir fotos de tu ordenador de sobremesa, para que los demás usuarios puedan observar tu trabajo a la hora de montarlo y diseñarlo, así como valorar tu gusto y la elección de piezas que has realizado para el proyecto, además podrán dejar comentarios con su opinión. 
 Esta aplicación a su vez tendrá un top donde aparecerán los usuarios con mayor reputación por las valoraciones recibidas, y habrá otra sección donde salgan las últimas publicaciones en la aplicación, de esta manera todos los usuarios tendrán la posibilidad de ser vistos.
@@ -24,6 +24,10 @@ Se llevará a cabo a través de un sistema de correos que avisará de notificaci
 **Modelo entidad-relación**
 
 ![alt text](https://github.com/SexyBuggy/Hard-Paradise/blob/master/Capturas/ModeloEntidadRelacion.png)
+
+**Modelo navegación web**
+
+![alt text](https://github.com/SexyBuggy/Hard-Paradise/blob/master/Capturas/DiagramaNavegacion.png)
 
 **Miembros del equipo:**
 
