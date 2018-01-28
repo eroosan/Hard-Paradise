@@ -21,6 +21,10 @@ Esta aplicación a su vez tendrá un top donde aparecerán los usuarios con mayo
 
 Se llevará a cabo a través de un sistema de correos que avisará de notificaciones como la activación de la cuenta o interacciones con otros usuarios.
 
+**Modelo entidad-relación**
+
+![alt text](https://github.com/SexyBuggy/Hard-Paradise/blob/master/Capturas/ModeloEntidadRelacion.png)
+
 **Miembros del equipo:**
 
 * Nombre completo: Gabriel Eiraldi Zoff
