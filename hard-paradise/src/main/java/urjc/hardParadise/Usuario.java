@@ -9,14 +9,12 @@ import javax.persistence.*;
 public class Usuario {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
-	
 	private String nombre;
+
 	private String contraseña;
 	private String correo;
 	
-	@OneToMany
+	@OneToMany(mappedBy="usuario")
 	private List<Montaje> montajes;
 	
 	@ManyToMany
@@ -34,7 +32,7 @@ public class Usuario {
 		this.contraseña = contraseña;
 		this.correo = correo;
 	}
-
+/*
 	public long getId() {
 		return id;
 	}
@@ -43,7 +41,7 @@ public class Usuario {
 	public void setId(long id) {
 		this.id = id;
 	}
-
+*/
 	public String getNombre() {
 		return nombre;
 	}
