@@ -9,7 +9,10 @@ public class Comentario {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	//private Usuario usuario;
+	private String textoComentario;
+	
+	@ManyToOne
+	private Usuario usuario;
 	
 	public Comentario(){
 		
@@ -19,17 +22,12 @@ public class Comentario {
 		this.id = id;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		//this.usuario = usuario;
-	}
+	
 
 	public long getId() {
 		return id;
 	}
 
-	//public Usuario getUsuario() {
-		//return usuario;
-	//}
 	
 
 }

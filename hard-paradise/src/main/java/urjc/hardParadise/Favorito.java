@@ -10,8 +10,11 @@ public class Favorito {
 	@GeneratedValue (strategy = GenerationType.AUTO)
 	private long id;
 	
-	/*private Usuario usuario;
-	private Montaje montaje;*/
+	@ManyToOne
+	private Usuario usuario;
+	
+	@ManyToOne
+	private Montaje montaje;
 	
 	public Favorito() {
 		

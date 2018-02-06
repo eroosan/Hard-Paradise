@@ -1,5 +1,7 @@
 package urjc.hardParadise;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,14 +11,28 @@ public class Montaje {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	//private Usuario usuario;
+	
 	private String descripcion;
 	private String imagen;
 	private Double valoracion;
 	
+	@ManyToOne
+	private Usuario usuario;
+	
+	@OneToMany
+	private List<Comentario> comentarios;
+	
 	
 	public Montaje() {
 		
+	}
+	
+	public Montaje(String descripcion, String imagen, Double valoracion,Usuario usuario)
+	{
+		this.descripcion = descripcion;
+		this.imagen = imagen;
+		this.valoracion = valoracion;
+		this.usuario = usuario;
 	}
 
 
@@ -28,16 +44,6 @@ public class Montaje {
 	public void setId(long id) {
 		this.id = id;
 	}
-
-
-	/*public Usuario getUsuario() {
-		return usuario;
-	}
-
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}*/
 
 
 	public String getDescripcion() {
