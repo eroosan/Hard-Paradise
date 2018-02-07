@@ -19,6 +19,15 @@ public class Montaje {
 	@ManyToOne
 	private Usuario usuario;
 	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+
 	@OneToMany
 	private List<Comentario> comentarios;
 	
@@ -27,12 +36,11 @@ public class Montaje {
 		
 	}
 	
-	public Montaje(String descripcion, String imagen, Double valoracion,Usuario usuario)
+	public Montaje(String descripcion, String imagen, Double valoracion)
 	{
 		this.descripcion = descripcion;
 		this.imagen = imagen;
 		this.valoracion = valoracion;
-		this.usuario = usuario;
 	}
 
 

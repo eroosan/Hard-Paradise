@@ -28,8 +28,8 @@ public class ControllerUsuario {
 		Usuario usuario1 = repositoryUsuario.save(new Usuario("doke", "1234", "XXXX"));
 		Usuario usuario2 = repositoryUsuario.save(new Usuario("HULIO", "CABESA", "XXXX"));
 		
-		repositoryMontaje.save(new Montaje("des","imagen",10.0,usuario1));
-		repositoryMontaje.save(new Montaje("des","imagen",10.0,usuario2));
+		repositoryMontaje.save(new Montaje("des","imagen",10.0));
+		repositoryMontaje.save(new Montaje("des","imagen",10.0));
 	
 	}
 	
@@ -39,7 +39,8 @@ public class ControllerUsuario {
 
 		repositoryUsuario.save(new Usuario(nombre,contraseña,correo));
 		
-		model.addAttribute("usuarios", repositoryUsuario.findAll());
+		model.addAttribute("nombre", nombre);
+		model.addAttribute("correo",correo);
 
 		return "verPerfil";
 	}
@@ -62,5 +63,14 @@ public class ControllerUsuario {
 		model.addAttribute("nombre",U1.getNombre());
 		model.addAttribute("correo",U1.getCorreo());
 		return "verPerfil";
+	}
+	@PostMapping("/guardarMontaje")
+	public String guardarMontaje(Model model, @RequestParam String descripcion, @RequestParam String imagen,HttpSession sesion ) {
+		
+		Montaje montaje1 = new Montaje(descripcion,imagen,0.0);
+		montaje1.setUsuario((Usuario) sesion.getAttribute("Usuario"));
+		repositoryMontaje.save(montaje1);
+		
+		return "nuevo_montaje_guardado";
 	}
 }
