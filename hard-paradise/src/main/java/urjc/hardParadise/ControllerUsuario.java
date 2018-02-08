@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -72,5 +74,20 @@ public class ControllerUsuario {
 		repositoryMontaje.save(montaje1);
 		
 		return "nuevo_montaje_guardado";
+	}
+	@GetMapping("/builds")
+	public String paginaBuilds(Model model,HttpSession sesion ) {
+		model.addAttribute("builds",repositoryMontaje.findAll());
+		
+		return "builds";
+	}
+	@RequestMapping("/montaje")
+	public String mostrarMontaje(Model model,@RequestParam long id, HttpSession sesion ) {
+		//Long idL = Long.parseLong(id);
+		Montaje montaje1 = repositoryMontaje.findOne(id);
+		model.addAttribute("id",montaje1.getId());
+		model.addAttribute("imagen",montaje1.getImagen());
+		model.addAttribute("descripcion",montaje1.getDescripcion());
+		return "montaje";
 	}
 }

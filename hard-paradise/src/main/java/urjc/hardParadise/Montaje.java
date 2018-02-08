@@ -19,13 +19,7 @@ public class Montaje {
 	@ManyToOne
 	private Usuario usuario;
 	
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
+	
 
 
 	@OneToMany
@@ -82,5 +76,11 @@ public class Montaje {
 	public void setValoracion(Double valoracion) {
 		this.valoracion = valoracion;
 	}
+	public Usuario getUsuario() {
+		return usuario;
+	}
 
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 }

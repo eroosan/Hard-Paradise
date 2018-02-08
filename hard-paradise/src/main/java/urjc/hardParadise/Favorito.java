@@ -28,21 +28,5 @@ public class Favorito {
 		this.id = id;
 	}
 
-	/*public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
-	public Montaje getMontaje() {
-		return montaje;
-	}
-
-	public void setMontaje(Montaje montaje) {
-		this.montaje = montaje;
-	}
-	*/
 
 }

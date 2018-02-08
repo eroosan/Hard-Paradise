@@ -20,7 +20,7 @@ public class Usuario {
 	@ManyToMany
 	private List<Usuario> seguidos;
 	
-	@OneToMany
+	@OneToMany(mappedBy="usuario")
 	private List<Favorito> favoritos;
 	
 	
