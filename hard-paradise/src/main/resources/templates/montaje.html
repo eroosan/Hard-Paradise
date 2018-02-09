@@ -70,6 +70,18 @@
             <div>
            		<p>{{imagen}}</p>
 				<p>{{descripcion}}</p>
+				<hr>
+				<form action="/guardarComentario?id={{id}}" method="post">
+				<p>Nuevo Comentario:</p>
+				<input type='text' name='textoComentario'>
+				<input type='submit' value='Enviar'/>
+				</form>
+				<hr>
+				{{#comentarios}}
+					<p>{{usuario.nombre}}</p>
+					<p>{{textoComentario}}</p>
+					<hr>
+				{{/comentarios}}
             </div>
         </div>
         

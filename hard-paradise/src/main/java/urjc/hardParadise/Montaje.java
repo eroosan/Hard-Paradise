@@ -22,7 +22,7 @@ public class Montaje {
 	
 
 
-	@OneToMany
+	@OneToMany(mappedBy="montaje")
 	private List<Comentario> comentarios;
 	
 	

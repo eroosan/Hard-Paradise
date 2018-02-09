@@ -1,6 +1,8 @@
 package urjc.hardParadise;
 
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 
@@ -24,14 +26,21 @@ public class ControllerUsuario {
 	@Autowired
 	private MontajeRepository repositoryMontaje;
 	
+	@Autowired
+	private ComentarioRepository repositoryComentario;
 	
 	@PostConstruct
 	public void init() {
 		Usuario usuario1 = repositoryUsuario.save(new Usuario("doke", "1234", "XXXX"));
 		Usuario usuario2 = repositoryUsuario.save(new Usuario("HULIO", "CABESA", "XXXX"));
 		
+		Montaje montaje1 = repositoryMontaje.save(new Montaje("des","imagen",10.0));
 		repositoryMontaje.save(new Montaje("des","imagen",10.0));
-		repositoryMontaje.save(new Montaje("des","imagen",10.0));
+		
+		Comentario comentario1 = new Comentario("primer comentario");
+		comentario1.setUsuario(usuario1);
+		comentario1.setMontaje(montaje1);
+		repositoryComentario.save(comentario1);
 	
 	}
 	
@@ -88,6 +97,29 @@ public class ControllerUsuario {
 		model.addAttribute("id",montaje1.getId());
 		model.addAttribute("imagen",montaje1.getImagen());
 		model.addAttribute("descripcion",montaje1.getDescripcion());
+		List<Comentario> comentarios = repositoryComentario.findByMontaje(montaje1);
+		model.addAttribute("comentarios",comentarios);
 		return "montaje";
+	}
+	
+	@PostMapping("/guardarComentario")
+	public String guardarComentario(Model model,@RequestParam long id,@RequestParam String textoComentario, HttpSession sesion)
+	{
+		Montaje montaje = repositoryMontaje.findOne(id);
+		Usuario usuario= (Usuario) sesion.getAttribute("usuario");
+		if(textoComentario!="")
+		{
+			Comentario comentario = new Comentario(textoComentario);
+			comentario.setMontaje(montaje);
+			comentario.setUsuario((Usuario) sesion.getAttribute("Usuario"));
+			repositoryComentario.save(comentario);
+		}
+		
+		model.addAttribute("id",montaje.getId());
+		model.addAttribute("imagen",montaje.getImagen());
+		model.addAttribute("descripcion",montaje.getDescripcion());
+		List<Comentario> comentarios = repositoryComentario.findByMontaje(montaje);
+		model.addAttribute("comentarios",comentarios);
+		return"montaje";
 	}
 }
