@@ -70,6 +70,14 @@
             <div>
            		<p>{{imagen}}</p>
 				<p>{{descripcion}}</p>
+				<form action="/marcarFavorito?id={{id}}" method="post">
+				<input type='submit' value='Marcar como favorito'/>
+				</form>
+				<form action="/enviarValoracion?id={{id}}" method="post">
+				<p>{{valoracion}} de {{nVotos}} votos    <input type="number" min="0" max="10" name='valorar'> <input type="submit" value="Enviar"></p>
+				
+				</form>
+				
 				<hr>
 				<form action="/guardarComentario?id={{id}}" method="post">
 				<p>Nuevo Comentario:</p>

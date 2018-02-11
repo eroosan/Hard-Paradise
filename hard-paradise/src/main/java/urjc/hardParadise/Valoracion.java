@@ -2,22 +2,26 @@ package urjc.hardParadise;
 
 import javax.persistence.*;
 
-
 @Entity
-public class Favorito {
+public class Valoracion {
 	
 	@Id
-	@GeneratedValue (strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@ManyToOne
-	private Usuario usuario;
+	private int valoracion; 
 	
 	@ManyToOne
 	private Montaje montaje;
 	
-	public Favorito() {
+	public Valoracion()
+	{
 		
+	}
+	
+	public Valoracion(int valoracion)
+	{
+		this.valoracion = valoracion;
 	}
 
 	public long getId() {
@@ -28,14 +32,6 @@ public class Favorito {
 		this.id = id;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
 	public Montaje getMontaje() {
 		return montaje;
 	}
@@ -44,5 +40,13 @@ public class Favorito {
 		this.montaje = montaje;
 	}
 
+	public int getValoracion() {
+		return valoracion;
+	}
+
+	public void setValoracion(int valoracion) {
+		this.valoracion = valoracion;
+	}
+	
 
 }

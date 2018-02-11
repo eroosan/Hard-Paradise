@@ -29,6 +29,11 @@ public class ControllerUsuario {
 	@Autowired
 	private ComentarioRepository repositoryComentario;
 	
+	@Autowired
+	private FavoritoRepository repositoryFavorito;
+	
+	@Autowired ValoracionRepository repositoryValoracion;
+	
 	@PostConstruct
 	public void init() {
 		Usuario usuario1 = repositoryUsuario.save(new Usuario("doke", "1234", "XXXX"));
@@ -93,21 +98,38 @@ public class ControllerUsuario {
 	@RequestMapping("/montaje")
 	public String mostrarMontaje(Model model,@RequestParam long id, HttpSession sesion ) {
 		//Long idL = Long.parseLong(id);
+		int votos=0, valoracionMedia=0;
+		
 		Montaje montaje1 = repositoryMontaje.findOne(id);
 		model.addAttribute("id",montaje1.getId());
 		model.addAttribute("imagen",montaje1.getImagen());
 		model.addAttribute("descripcion",montaje1.getDescripcion());
 		List<Comentario> comentarios = repositoryComentario.findByMontaje(montaje1);
 		model.addAttribute("comentarios",comentarios);
+		List<Valoracion> valoraciones = repositoryValoracion.findByMontaje(montaje1);
+		if(!valoraciones.isEmpty() )
+		{
+			for(Valoracion valoracion:valoraciones)
+			{
+				votos++;
+				valoracionMedia += valoracion.getValoracion();
+			}
+			valoracionMedia = valoracionMedia/votos;
+		}
+		model.addAttribute("valoracion",valoracionMedia);
+		model.addAttribute("nVotos",votos);
+		
 		return "montaje";
 	}
 	
 	@PostMapping("/guardarComentario")
 	public String guardarComentario(Model model,@RequestParam long id,@RequestParam String textoComentario, HttpSession sesion)
 	{
+		int votos=0;
+		double valoracionMedia=0;
 		Montaje montaje = repositoryMontaje.findOne(id);
-		Usuario usuario= (Usuario) sesion.getAttribute("usuario");
-		if(textoComentario!="")
+		Usuario usuario= (Usuario) sesion.getAttribute("Usuario");
+		if(textoComentario!="" && usuario!=null )
 		{
 			Comentario comentario = new Comentario(textoComentario);
 			comentario.setMontaje(montaje);
@@ -120,6 +142,90 @@ public class ControllerUsuario {
 		model.addAttribute("descripcion",montaje.getDescripcion());
 		List<Comentario> comentarios = repositoryComentario.findByMontaje(montaje);
 		model.addAttribute("comentarios",comentarios);
+		
+		List<Valoracion> valoraciones = repositoryValoracion.findByMontaje(montaje);
+		if(!valoraciones.isEmpty() )
+		{
+			for(Valoracion valoracion:valoraciones)
+			{
+				votos++;
+				valoracionMedia += valoracion.getValoracion();
+			}
+			valoracionMedia = valoracionMedia/votos;
+		}
+		model.addAttribute("valoracion",valoracionMedia);
+		model.addAttribute("nVotos",votos);
 		return"montaje";
+	}
+	
+	@PostMapping("/marcarFavorito")
+	public String marcarFavorito(Model model,@RequestParam long id, HttpSession sesion)
+	{
+		int votos=0;
+		double valoracionMedia=0;
+
+		Montaje montaje = repositoryMontaje.findOne(id);
+		if(sesion.getAttribute("Usuario")!= null)	
+		{
+			Favorito favorito = new Favorito();
+			favorito.setUsuario((Usuario) sesion.getAttribute("Usuario"));
+			favorito.setMontaje(montaje);
+			repositoryFavorito.save(favorito);
+		}
+		
+		model.addAttribute("id",montaje.getId());
+		model.addAttribute("imagen",montaje.getImagen());
+		model.addAttribute("descripcion",montaje.getDescripcion());
+		List<Comentario> comentarios = repositoryComentario.findByMontaje(montaje);
+		model.addAttribute("comentarios",comentarios);
+		
+		List<Valoracion> valoraciones = repositoryValoracion.findByMontaje(montaje);
+		if(!valoraciones.isEmpty() )
+		{
+			for(Valoracion valoracion:valoraciones)
+			{
+				votos++;
+				valoracionMedia += valoracion.getValoracion();
+			}
+			valoracionMedia = valoracionMedia/votos;
+		}
+		model.addAttribute("valoracion",valoracionMedia);
+		model.addAttribute("nVotos",votos);
+		
+		return "montaje";
+	}
+	
+	@PostMapping("/enviarValoracion")
+	public String enviarValoracion(Model model, @RequestParam long id,  @RequestParam int valorar,HttpSession sesion)
+	{
+		int votos=0;
+		double valoracionMedia=0;
+		Montaje montaje = repositoryMontaje.findOne(id);
+		if(sesion.getAttribute("Usuario")!= null)	
+		{
+			Valoracion valoracion = new Valoracion(valorar);
+			valoracion.setMontaje(montaje);
+			repositoryValoracion.save(valoracion);
+		}
+		model.addAttribute("id",montaje.getId());
+		model.addAttribute("imagen",montaje.getImagen());
+		model.addAttribute("descripcion",montaje.getDescripcion());
+		List<Comentario> comentarios = repositoryComentario.findByMontaje(montaje);
+		model.addAttribute("comentarios",comentarios);
+		
+		List<Valoracion> valoraciones = repositoryValoracion.findByMontaje(montaje);
+		if(!valoraciones.isEmpty() )
+		{
+			for(Valoracion valoracion:valoraciones)
+			{
+				votos++;
+				valoracionMedia += valoracion.getValoracion();
+			}
+			valoracionMedia = valoracionMedia/votos;
+		}
+		model.addAttribute("valoracion",valoracionMedia);
+		model.addAttribute("nVotos",votos);
+		
+		return "montaje";
 	}
 }
