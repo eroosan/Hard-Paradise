@@ -68,12 +68,15 @@
                 </h1>
             </div>
             <div>
-           		<p>{{imagen}}</p>
+           		<!-- <p>{{imagen}}</p>-->
+           		<img src="{{imagen}}"  width="300" height="auto"> 
+				<hr>
 				<p>{{descripcion}}</p>
-				<form action="/marcarFavorito?id={{id}}" method="post">
+				<hr>
+			 	<form action="/marcarFavorito?id={{id}}" method="post"> 
 				<input type='submit' value='Marcar como favorito'/>
 				</form>
-				<form action="/enviarValoracion?id={{id}}" method="post">
+			  	<form action="/enviarValoracion?id={{id}}" method="post"> 
 				<p>{{valoracion}} de {{nVotos}} votos    <input type="number" min="0" max="10" name='valorar'> <input type="submit" value="Enviar"></p>
 				
 				</form>

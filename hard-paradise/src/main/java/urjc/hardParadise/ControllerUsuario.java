@@ -1,19 +1,33 @@
 package urjc.hardParadise;
 
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpSession;
+import javax.sql.rowset.serial.SerialBlob;
+import javax.sql.rowset.serial.SerialException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 
 
@@ -39,12 +53,12 @@ public class ControllerUsuario {
 		Usuario usuario1 = repositoryUsuario.save(new Usuario("doke", "1234", "XXXX"));
 		Usuario usuario2 = repositoryUsuario.save(new Usuario("HULIO", "CABESA", "XXXX"));
 		
-		Montaje montaje1 = repositoryMontaje.save(new Montaje("des","imagen",10.0));
-		repositoryMontaje.save(new Montaje("des","imagen",10.0));
+	//	Montaje montaje1 = repositoryMontaje.save(new Montaje("des","imagen",10.0));
+	//	repositoryMontaje.save(new Montaje("des","imagen",10.0));
 		
 		Comentario comentario1 = new Comentario("primer comentario");
 		comentario1.setUsuario(usuario1);
-		comentario1.setMontaje(montaje1);
+	//	comentario1.setMontaje(montaje1);
 		repositoryComentario.save(comentario1);
 	
 	}
@@ -80,14 +94,32 @@ public class ControllerUsuario {
 		model.addAttribute("correo",U1.getCorreo());
 		return "verPerfil";
 	}
+	
 	@PostMapping("/guardarMontaje")
-	public String guardarMontaje(Model model, @RequestParam String descripcion, @RequestParam String imagen,HttpSession sesion ) {
-		
+	public String 	guardarMontaje(Model model, @RequestParam String descripcion, @RequestParam String imagen, HttpSession sesion ) throws SerialException, SQLException 
+	{
+	/*	File file =new File(imagen);
+		Blob blob = null;
+		byte[] imagenByte=null;
+		if(file.exists()){
+			try {
+				BufferedImage bufferedImage=ImageIO.read(file);
+				ByteArrayOutputStream byteOutStream=new ByteArrayOutputStream();
+				ImageIO.write(bufferedImage, "png", byteOutStream);
+				imagenByte=byteOutStream.toByteArray();
+			    blob = new javax.sql.rowset.serial.SerialBlob(imagenByte);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}*/
 		Montaje montaje1 = new Montaje(descripcion,imagen,0.0);
 		montaje1.setUsuario((Usuario) sesion.getAttribute("Usuario"));
+		montaje1.setImagen(imagen);
+		model.addAttribute("Imagen", montaje1.getImagen());
+		model.addAttribute("Descripcion",montaje1.getDescripcion());
 		repositoryMontaje.save(montaje1);
-		
-		return "nuevo_montaje_guardado";
+	
+			return "nuevo_montaje_guardado";
 	}
 	@GetMapping("/builds")
 	public String paginaBuilds(Model model,HttpSession sesion ) {

@@ -68,13 +68,13 @@
                 </h1>
             </div>
             <div class="row">	
-		 	<form action="guardarMontaje" method="post">
-	 		<p>Descripcion: </p>
-	 		<input type='text' name='descripcion'/>
-	 		<p>Imagen:</p>
-	 		<input type='text' name='imagen'/>	 
-	 		<input type='submit' value='Guardar'/>
-	 	</form>
+	 		<form method="post" action="guardarMontaje" enctype="multipart/form-data">
+				<p>Descripcion:</p>
+				<input type="text" name="descripcion"/>
+				<p>Imagen:</p>
+				<input type="text" name="imagen"/>
+				<input type="submit" value="Subir archivo"/>
+			</form>
 	 	</div>
             
         </div>
