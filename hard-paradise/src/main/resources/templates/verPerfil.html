@@ -45,7 +45,7 @@
                                 <a href="registro.html">Registrarse</a>
                             </li>
                             <li>
-                                <a href="perfil.html">Perfil</a>
+                                <a href="verPerfil.html">Perfil</a>
                             </li>
                         </ul>
                     </li>
@@ -74,7 +74,9 @@
 	 		<p>Nombre: {{nombre}}</p> 
 	 		<p>Correo: {{correo}}</p>
 	 		<input type='submit' value='Editar'/>
-	
+			<form action="/verFavoritos" method="get">
+	 		<input type='submit'  value='Ver mis favoritos'/>
+	 		</form>
 	 	</div>
     </div>
     

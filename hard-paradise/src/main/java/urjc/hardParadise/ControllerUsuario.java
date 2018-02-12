@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -48,20 +49,6 @@ public class ControllerUsuario {
 	
 	@Autowired ValoracionRepository repositoryValoracion;
 	
-	@PostConstruct
-	public void init() {
-		Usuario usuario1 = repositoryUsuario.save(new Usuario("doke", "1234", "XXXX"));
-		Usuario usuario2 = repositoryUsuario.save(new Usuario("HULIO", "CABESA", "XXXX"));
-		
-	//	Montaje montaje1 = repositoryMontaje.save(new Montaje("des","imagen",10.0));
-	//	repositoryMontaje.save(new Montaje("des","imagen",10.0));
-		
-		Comentario comentario1 = new Comentario("primer comentario");
-		comentario1.setUsuario(usuario1);
-	//	comentario1.setMontaje(montaje1);
-		repositoryComentario.save(comentario1);
-	
-	}
 	
 	@PostMapping("/guardarusuario")
 	public String guardarAnuncio(Model model, @RequestParam String nombre, @RequestParam String contraseña,
@@ -84,14 +71,13 @@ public class ControllerUsuario {
 
 		return "inicioSesion";
 	}
-	@PostMapping("/verPerfil")
-	public String verPerfil(Model model, @RequestParam String nombre, @RequestParam String correo,HttpSession sesion ) {
+	@GetMapping("/verPerfil")
+	public String verPerfil(Model model, HttpSession sesion ) {
 		
-		Usuario U1=repositoryUsuario.findOne(nombre);
+		Usuario usuario = (Usuario) sesion.getAttribute("Usuario");
+		model.addAttribute("nombre",usuario.getNombre());
+		model.addAttribute("correo",usuario.getCorreo());
 		
-		sesion.setAttribute("Usuario", U1);
-		model.addAttribute("nombre",U1.getNombre());
-		model.addAttribute("correo",U1.getCorreo());
 		return "verPerfil";
 	}
 	
@@ -259,5 +245,60 @@ public class ControllerUsuario {
 		model.addAttribute("nVotos",votos);
 		
 		return "montaje";
+	}
+	
+	@GetMapping("verFavoritos")
+	public String verFavoritos(Model model,HttpSession sesion)
+	{
+		List<Montaje> montajes= new ArrayList<Montaje>();
+		Usuario usuario = (Usuario) sesion.getAttribute("Usuario");
+		
+		List<Favorito> favoritos = repositoryFavorito.findByUsuario(usuario);
+		
+			for(Favorito favorito: favoritos)
+			{
+				montajes.add(favorito.getMontaje());
+			}
+			model.addAttribute("favoritos",montajes);
+			return "favoritosPerfil";
+	}
+	
+	@PostMapping("/seguirUsuario")
+	public String seguirUsuario(Model model, @RequestParam long id,HttpSession sesion)
+	{
+		int votos=0;
+		double valoracionMedia=0;
+		
+		Montaje montaje = repositoryMontaje.findOne(id);
+		Usuario usuariopropio = (Usuario) sesion.getAttribute("Usuario");
+		if(sesion.getAttribute("Usuario")!= null)	
+		{
+			Usuario usuario = montaje.getUsuario();
+			List<Usuario> seguidos = usuariopropio.getSeguidos();
+			seguidos.add(usuario);
+			usuariopropio.setSeguidos(seguidos);
+		}
+		
+		model.addAttribute("id",montaje.getId());
+		model.addAttribute("imagen",montaje.getImagen());
+		model.addAttribute("descripcion",montaje.getDescripcion());
+		List<Comentario> comentarios = repositoryComentario.findByMontaje(montaje);
+		model.addAttribute("comentarios",comentarios);
+		
+		List<Valoracion> valoraciones = repositoryValoracion.findByMontaje(montaje);
+		if(!valoraciones.isEmpty() )
+		{
+			for(Valoracion valoracion:valoraciones)
+			{
+				votos++;
+				valoracionMedia += valoracion.getValoracion();
+			}
+			valoracionMedia = valoracionMedia/votos;
+		}
+		model.addAttribute("valoracion",valoracionMedia);
+		model.addAttribute("nVotos",votos);
+		
+		return "montaje";
+
 	}
 }

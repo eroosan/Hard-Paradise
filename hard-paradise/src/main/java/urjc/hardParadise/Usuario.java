@@ -75,6 +75,10 @@ public class Usuario {
 	public void setSeguidos(List<Usuario> seguidos) {
 		this.seguidos = seguidos;
 	}
+	public void añadirSeguido(Usuario usuario)
+	{
+		seguidos.add(usuario);
+	}
 	
 	
 	

@@ -39,13 +39,13 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuario <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="inicio_sesion.html">Iniciar sesión</a>
+                                <a href="inicio_sesion.html">Iniciar Sesión</a>
                             </li>
                             <li>
                                 <a href="registro.html">Registrarse</a>
                             </li>
                             <li>
-                                <a href="perfil.html">Perfil</a>
+                                <a href="verPerfil.html">Perfil</a>
                             </li>
                         </ul>
                     </li>
@@ -64,16 +64,36 @@
         <!-- Page Heading/Breadcrumbs -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Builds
+                <h1 class="page-header">Favoritos
+                   
                 </h1>
             </div>
-            <a href="nuevo_montaje.html">Nuevo montaje</a>
         </div>
-        
-    </div>
-    <!-- /.container -->
+		<div class="row">	
+
+	 		  {{#favoritos}}
+           		 <form>
+            		<!-- <p>{{id}}</p>-->
+
+					<!--<p>{{imagen}}</p>	-->
+					<img src="{{{Imagen}}}"  width="300" height="auto"> 
+					<div style="height:60px;width:300px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+						<p>{{descripcion}}</p>
+					</div>
+				 		<a href="/montaje?id={{id}}"> Ver montaje</a> 
+					<!-- <input type='submit' formaction="/montaje?id={{id}}"  value='Ver montaje'/>  -->
+					<hr>
+				</form>
+			{{/favoritos}}
 	
-	<!-- jQuery -->
+	 	</div>
+    </div>
+    
+    <!-- /.container -->
+    <!-- /.ENTRE ESTOS COMENTARIOS HAY QUE AÑADIR LO QUE VAYAMOS A USAR-->
+		
+	<!-- /.ENTRE ESTOS COMENTARIOS HAY QUE AÑADIR LO QUE VAYAMOS A USAR-->
+		<!-- jQuery -->
     <script src="js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
