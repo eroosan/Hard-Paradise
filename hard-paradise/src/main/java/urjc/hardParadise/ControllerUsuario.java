@@ -45,7 +45,10 @@ public class ControllerUsuario {
 	private ComentarioRepository repositoryComentario;
 	
 	@Autowired
-	private FavoritoRepository repositoryFavorito;
+	private FavoritoRepository repositoryFavorito;	
+	
+	@Autowired
+	private NoticiaRepository repositoryNoticia;
 	
 	@Autowired ValoracionRepository repositoryValoracion;
 	
@@ -300,5 +303,22 @@ public class ControllerUsuario {
 		
 		return "montaje";
 
+	}
+	@PostMapping("/guardarNoticia")
+	public String guardarNoticia(Model model, @RequestParam String noticia) {
+
+		Noticia noticia1 =new Noticia();
+		noticia1.setNoticia(noticia);
+		repositoryNoticia.save(noticia1);
+		
+		model.addAttribute("noticia", noticia);
+		model.addAttribute("noticias",repositoryNoticia.findAll());
+		return "noticias";
+	}
+	@GetMapping("/noticias")
+	public String paginaNoticias(Model model,HttpSession sesion ) {
+		model.addAttribute("noticias",repositoryNoticia.findAll());
+		
+		return "noticias";
 	}
 }

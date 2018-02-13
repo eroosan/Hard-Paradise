@@ -29,6 +29,40 @@ Se llevará a cabo a través de un sistema de correos que avisará de notificaci
 
 ![alt text](https://github.com/SexyBuggy/Hard-Paradise/blob/master/Capturas/DiagramaNavegacion.png)
 
+**Modelo de datos UML **
+
+![alt text](https://github.com/SexyBuggy/Hard-Paradise/blob/master/Capturas/ModeloDatosUML.jpg)
+
+
+**Capturas de pantalla**
+
+Noticias:
+Nos muestra en la misma pagina todas las noticias que se han publicado en la aplicacion, asi como permite publicar nuevas.
+
+![alt text](https://github.com/SexyBuggy/Hard-Paradise/blob/master/Capturas/noticias.png)
+
+
+
+Builds:
+Nos muestra una vista previa de cada Montaje publicado por los usuarios, permitiendo acceder a cada uno de ellos individualmente.
+
+
+![alt text](https://github.com/SexyBuggy/Hard-Paradise/blob/master/Capturas/builds.png)
+
+Una vez accedido a un montaje, tenemos la posibilidad de leer la descripcion completa,y dar una valoracion, asi como de ver y realizar comentarios.
+
+
+![alt text](https://github.com/SexyBuggy/Hard-Paradise/blob/master/Capturas/montaje.png)
+
+Usuario:
+Nos muestra nuestros datos de usuario, además de permitirnos ver los usuarios a los que seguimos, permitiéndolos modificarlos, asi como acceder a un nuevo registro e inicio de sesion.
+
+![alt text](https://github.com/SexyBuggy/Hard-Paradise/blob/master/Capturas/perfil.png)
+
+
+![alt text](https://github.com/SexyBuggy/Hard-Paradise/blob/master/Capturas/favoritos.png)
+
+
 **Miembros del equipo:**
 
 * Nombre completo: Gabriel Eiraldi Zoff
