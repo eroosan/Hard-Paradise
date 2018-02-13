@@ -11,6 +11,7 @@ import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 import javax.imageio.ImageIO;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
 
+import org.apache.coyote.http11.OutputFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -69,10 +71,16 @@ public class ControllerUsuario {
 		
 		Usuario U1=repositoryUsuario.findOne(nombre);
 		
-		sesion.setAttribute("Usuario", U1);
-		model.addAttribute("nombre",U1.getNombre());
-
-		return "inicioSesion";
+		if(U1 != null && contraseña.equals(U1.getContraseña()))
+		{
+			sesion.setAttribute("Usuario", U1);
+			model.addAttribute("nombre",U1.getNombre());
+			return "inicioSesion";
+		}
+		else
+		{
+			return "inicio_error";
+		}
 	}
 	@GetMapping("/verPerfil")
 	public String verPerfil(Model model, HttpSession sesion ) {
@@ -85,7 +93,7 @@ public class ControllerUsuario {
 	}
 	
 	@PostMapping("/guardarMontaje")
-	public String 	guardarMontaje(Model model,@RequestParam String titulo, @RequestParam String descripcion, @RequestParam String imagen, HttpSession sesion ) throws SerialException, SQLException 
+	public String 	guardarMontaje(Model model,@RequestParam String titulo, @RequestParam String descripcion, @RequestParam MultipartFile imagen, HttpSession sesion ) throws SerialException, SQLException 
 	{
 	/*	File file =new File(imagen);
 		Blob blob = null;
@@ -101,9 +109,19 @@ public class ControllerUsuario {
 				e.printStackTrace();
 			}
 		}*/
-		Montaje montaje1 = new Montaje(titulo,descripcion,imagen,0.0);
+		
+		File outputFile = null;
+		try {
+			outputFile = new File("imagenes/"+sesion.getId()+imagen.getOriginalFilename());
+			outputFile.createNewFile();
+			BufferedImage bufferedImage=ImageIO.read(imagen.getInputStream());
+			ImageIO.write(bufferedImage, "png", outputFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Montaje montaje1 = new Montaje(titulo,descripcion,outputFile.getPath(),0.0);
 		montaje1.setUsuario((Usuario) sesion.getAttribute("Usuario"));
-		montaje1.setImagen(imagen);
+		montaje1.setImagen(outputFile.getPath());
 		model.addAttribute("Imagen", montaje1.getImagen());
 		model.addAttribute("Descripcion",montaje1.getDescripcion());
 		repositoryMontaje.save(montaje1);
@@ -285,9 +303,10 @@ public class ControllerUsuario {
 		if(sesion.getAttribute("Usuario")!= null)	
 		{
 			Usuario usuario = montaje.getUsuario();
-			List<Usuario> seguidos = usuariopropio.getSeguidos();
+			List<Usuario> seguidos = repositoryUsuario.findBySeguidos(usuariopropio);
 			seguidos.add(usuario);
 			usuariopropio.setSeguidos(seguidos);
+			repositoryUsuario.save(usuariopropio);
 		}
 		model.addAttribute("nombre",montaje.getUsuario().getNombre());
 		model.addAttribute("usuario.nombre",montaje.getUsuario().getNombre());

@@ -85,13 +85,13 @@
 				
 				<hr>
 				<form action="/guardarComentario?id={{id}}" method="post">
-				<p>Nuevo Comentario:</p>
-				<input type='text' name='textoComentario'>
-				<input type='submit' value='Enviar'/>
+					<p>Nuevo Comentario:</p>
+					<input type='text' name='textoComentario'>
+					<input type='submit' value='Enviar'/>
 				</form>
 				<hr>
 				{{#comentarios}}
-					<a href="/verPerfilInvitado?id={{nombre}}"> {{usuario.nombre}}</a>
+					<a href="/verPerfilInvitado?id={{usuario.nombre}}"> {{usuario.nombre}}</a>
 					<p>{{textoComentario}}</p>
 					<hr>
 				{{/comentarios}}
