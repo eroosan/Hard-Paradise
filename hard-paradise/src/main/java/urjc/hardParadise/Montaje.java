@@ -14,7 +14,7 @@ public class Montaje {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	
+	private String titulo;
 	private String descripcion;
 	private String imagen;
 	private Double valoracion;
@@ -33,8 +33,9 @@ public class Montaje {
 		
 	}
 	
-	public Montaje(String descripcion, String imagen, Double valoracion)
+	public Montaje(String titulo,String descripcion, String imagen, Double valoracion)
 	{
+		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.imagen = imagen;
 		this.valoracion = valoracion;
@@ -50,6 +51,14 @@ public class Montaje {
 		this.id = id;
 	}
 
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
 
 	public String getDescripcion() {
 		return descripcion;

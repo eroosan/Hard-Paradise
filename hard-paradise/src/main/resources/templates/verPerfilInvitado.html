@@ -39,7 +39,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuario <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="inicio_sesion.html">Iniciar sesión</a>
+                                <a href="inicio_sesion.html">Iniciar Sesión</a>
                             </li>
                             <li>
                                 <a href="registro.html">Registrarse</a>
@@ -64,44 +64,38 @@
         <!-- Page Heading/Breadcrumbs -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header"> {{titulo}} By <a href="/verPerfilInvitado?id={{nombre}}"> {{nombre}}</a>
+                <h1 class="page-header">Perfil
+                   
                 </h1>
             </div>
-            <div>
-           		<!-- <p>{{imagen}}</p>-->
-           		<img src="{{imagen}}"  width="300" height="auto"> 
-				<hr>
-				<p>{{descripcion}}</p>
-				<hr>
-			 	<form action="/marcarFavorito?id={{id}}" method="post"> 
-				<input type='submit' value='Marcar como favorito'/>
-				</form>
-			  	<form action="/enviarValoracion?id={{id}}" method="post"> 
-				<p>{{valoracion}} de {{nVotos}} votos    <input type="number" min="0" max="10" name='valorar'> <input type="submit" value="Enviar"></p>
-				</form>
-				<form action="/seguirUsuario?id={{id}}" method="post">
-				<input type="submit" value="Seguir Usuario"/>
-				</form>
-				
-				<hr>
-				<form action="/guardarComentario?id={{id}}" method="post">
-				<p>Nuevo Comentario:</p>
-				<input type='text' name='textoComentario'>
-				<input type='submit' value='Enviar'/>
-				</form>
-				<hr>
-				{{#comentarios}}
-					<a href="/verPerfilInvitado?id={{nombre}}"> {{usuario.nombre}}</a>
-					<p>{{textoComentario}}</p>
-					<hr>
-				{{/comentarios}}
-            </div>
         </div>
-        
+		<div class="row">	
+
+	 		<p>Nombre: {{nombre}}</p>
+	 		<hr>
+	 		<p>Montajes del usuario</p>
+	 		{{#builds}}
+            <form>
+            	<!-- <p>{{id}}</p>-->
+
+					<!--<p>{{imagen}}</p>	-->
+					<img src="{{{Imagen}}}"  width="300" height="auto"> 
+					<div style="height:60px;width:300px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+						<p>{{descripcion}}</p>
+					</div>
+				 		<a href="/montaje?id={{id}}"> Ver montaje</a> 
+					<!-- <input type='submit' formaction="/montaje?id={{id}}"  value='Ver montaje'/>  -->
+					<hr>
+			</form>
+			{{/builds}}
+	 	</div>
     </div>
+    
     <!-- /.container -->
-	
-	<!-- jQuery -->
+    <!-- /.ENTRE ESTOS COMENTARIOS HAY QUE AÑADIR LO QUE VAYAMOS A USAR-->
+		
+	<!-- /.ENTRE ESTOS COMENTARIOS HAY QUE AÑADIR LO QUE VAYAMOS A USAR-->
+		<!-- jQuery -->
     <script src="js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->

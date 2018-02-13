@@ -85,7 +85,7 @@ public class ControllerUsuario {
 	}
 	
 	@PostMapping("/guardarMontaje")
-	public String 	guardarMontaje(Model model, @RequestParam String descripcion, @RequestParam String imagen, HttpSession sesion ) throws SerialException, SQLException 
+	public String 	guardarMontaje(Model model,@RequestParam String titulo, @RequestParam String descripcion, @RequestParam String imagen, HttpSession sesion ) throws SerialException, SQLException 
 	{
 	/*	File file =new File(imagen);
 		Blob blob = null;
@@ -101,7 +101,7 @@ public class ControllerUsuario {
 				e.printStackTrace();
 			}
 		}*/
-		Montaje montaje1 = new Montaje(descripcion,imagen,0.0);
+		Montaje montaje1 = new Montaje(titulo,descripcion,imagen,0.0);
 		montaje1.setUsuario((Usuario) sesion.getAttribute("Usuario"));
 		montaje1.setImagen(imagen);
 		model.addAttribute("Imagen", montaje1.getImagen());
@@ -122,7 +122,9 @@ public class ControllerUsuario {
 		int votos=0, valoracionMedia=0;
 		
 		Montaje montaje1 = repositoryMontaje.findOne(id);
-		model.addAttribute("id",montaje1.getId());
+		model.addAttribute("nombre",montaje1.getUsuario().getNombre());
+		model.addAttribute("id",id);
+		model.addAttribute("titulo",montaje1.getTitulo());
 		model.addAttribute("imagen",montaje1.getImagen());
 		model.addAttribute("descripcion",montaje1.getDescripcion());
 		List<Comentario> comentarios = repositoryComentario.findByMontaje(montaje1);
@@ -157,8 +159,10 @@ public class ControllerUsuario {
 			comentario.setUsuario((Usuario) sesion.getAttribute("Usuario"));
 			repositoryComentario.save(comentario);
 		}
-		
-		model.addAttribute("id",montaje.getId());
+		model.addAttribute("nombre",montaje.getUsuario().getNombre());
+		model.addAttribute("usuario.nombre",montaje.getUsuario().getNombre());
+		model.addAttribute("id",id);
+		model.addAttribute("titulo",montaje.getTitulo());
 		model.addAttribute("imagen",montaje.getImagen());
 		model.addAttribute("descripcion",montaje.getDescripcion());
 		List<Comentario> comentarios = repositoryComentario.findByMontaje(montaje);
@@ -193,8 +197,10 @@ public class ControllerUsuario {
 			favorito.setMontaje(montaje);
 			repositoryFavorito.save(favorito);
 		}
-		
-		model.addAttribute("id",montaje.getId());
+		model.addAttribute("nombre",montaje.getUsuario().getNombre());
+		model.addAttribute("usuario.nombre",montaje.getUsuario().getNombre());
+		model.addAttribute("id",id);
+		model.addAttribute("titulo",montaje.getTitulo());
 		model.addAttribute("imagen",montaje.getImagen());
 		model.addAttribute("descripcion",montaje.getDescripcion());
 		List<Comentario> comentarios = repositoryComentario.findByMontaje(montaje);
@@ -228,7 +234,9 @@ public class ControllerUsuario {
 			valoracion.setMontaje(montaje);
 			repositoryValoracion.save(valoracion);
 		}
-		model.addAttribute("id",montaje.getId());
+		model.addAttribute("nombre",montaje.getUsuario().getNombre());
+		model.addAttribute("id",id);
+		model.addAttribute("titulo",montaje.getTitulo());
 		model.addAttribute("imagen",montaje.getImagen());
 		model.addAttribute("descripcion",montaje.getDescripcion());
 		List<Comentario> comentarios = repositoryComentario.findByMontaje(montaje);
@@ -281,8 +289,10 @@ public class ControllerUsuario {
 			seguidos.add(usuario);
 			usuariopropio.setSeguidos(seguidos);
 		}
-		
-		model.addAttribute("id",montaje.getId());
+		model.addAttribute("nombre",montaje.getUsuario().getNombre());
+		model.addAttribute("usuario.nombre",montaje.getUsuario().getNombre());
+		model.addAttribute("id",id);
+		model.addAttribute("titulo",montaje.getTitulo());
 		model.addAttribute("imagen",montaje.getImagen());
 		model.addAttribute("descripcion",montaje.getDescripcion());
 		List<Comentario> comentarios = repositoryComentario.findByMontaje(montaje);
@@ -320,5 +330,15 @@ public class ControllerUsuario {
 		model.addAttribute("noticias",repositoryNoticia.findAll());
 		
 		return "noticias";
+	}
+	
+	@GetMapping("/verPerfilInvitado")
+	public String verPerfilInvitado (Model model, @RequestParam String id, HttpSession sesion)
+	{
+		Usuario usuario = repositoryUsuario.findOne(id);
+		model.addAttribute("nombre",usuario.getNombre());
+		List<Montaje> montajes = repositoryMontaje.findByUsuario(usuario);
+		model.addAttribute("builds",montajes);
+		return "verPerfilInvitado";
 	}
 }
