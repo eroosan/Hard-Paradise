@@ -21,6 +21,9 @@ import javax.sql.rowset.serial.SerialException;
 
 import org.apache.coyote.http11.OutputFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -107,13 +110,14 @@ public class ControllerUsuario {
 			    blob = new javax.sql.rowset.serial.SerialBlob(imagenByte);
 			} catch (IOException e) {
 				e.printStackTrace();
-			}
+			}/
 		}*/
 		
 		File outputFile = null;
 		try {
-			outputFile = new File("imagenes/"+sesion.getId()+imagen.getOriginalFilename());
+			outputFile = new File("src/main/resources/static/imagenes/"+sesion.getId()+imagen.getOriginalFilename());
 			outputFile.createNewFile();
+			System.out.println(outputFile);
 			BufferedImage bufferedImage=ImageIO.read(imagen.getInputStream());
 			ImageIO.write(bufferedImage, "png", outputFile);
 		} catch (IOException e) {
@@ -121,7 +125,7 @@ public class ControllerUsuario {
 		}
 		Montaje montaje1 = new Montaje(titulo,descripcion,outputFile.getPath(),0.0);
 		montaje1.setUsuario((Usuario) sesion.getAttribute("Usuario"));
-		montaje1.setImagen(outputFile.getPath());
+		montaje1.setImagen(outputFile.getName());
 		model.addAttribute("Imagen", montaje1.getImagen());
 		model.addAttribute("Descripcion",montaje1.getDescripcion());
 		repositoryMontaje.save(montaje1);
@@ -130,7 +134,7 @@ public class ControllerUsuario {
 	}
 	@GetMapping("/builds")
 	public String paginaBuilds(Model model,HttpSession sesion ) {
-		model.addAttribute("builds",repositoryMontaje.findAll());
+		model.addAttribute("builds",repositoryMontaje.findAll(new Sort(new Order(Sort.Direction.DESC, "id"))));
 		
 		return "builds";
 	}
@@ -143,7 +147,7 @@ public class ControllerUsuario {
 		model.addAttribute("nombre",montaje1.getUsuario().getNombre());
 		model.addAttribute("id",id);
 		model.addAttribute("titulo",montaje1.getTitulo());
-		model.addAttribute("imagen",montaje1.getImagen());
+		model.addAttribute("Imagen", montaje1.getImagen());
 		model.addAttribute("descripcion",montaje1.getDescripcion());
 		List<Comentario> comentarios = repositoryComentario.findByMontaje(montaje1);
 		model.addAttribute("comentarios",comentarios);
@@ -181,7 +185,7 @@ public class ControllerUsuario {
 		model.addAttribute("usuario.nombre",montaje.getUsuario().getNombre());
 		model.addAttribute("id",id);
 		model.addAttribute("titulo",montaje.getTitulo());
-		model.addAttribute("imagen",montaje.getImagen());
+		model.addAttribute("Imagen", montaje.getImagen());
 		model.addAttribute("descripcion",montaje.getDescripcion());
 		List<Comentario> comentarios = repositoryComentario.findByMontaje(montaje);
 		model.addAttribute("comentarios",comentarios);
@@ -219,7 +223,7 @@ public class ControllerUsuario {
 		model.addAttribute("usuario.nombre",montaje.getUsuario().getNombre());
 		model.addAttribute("id",id);
 		model.addAttribute("titulo",montaje.getTitulo());
-		model.addAttribute("imagen",montaje.getImagen());
+		model.addAttribute("Imagen", montaje.getImagen());
 		model.addAttribute("descripcion",montaje.getDescripcion());
 		List<Comentario> comentarios = repositoryComentario.findByMontaje(montaje);
 		model.addAttribute("comentarios",comentarios);
@@ -255,7 +259,7 @@ public class ControllerUsuario {
 		model.addAttribute("nombre",montaje.getUsuario().getNombre());
 		model.addAttribute("id",id);
 		model.addAttribute("titulo",montaje.getTitulo());
-		model.addAttribute("imagen",montaje.getImagen());
+		model.addAttribute("Imagen", montaje.getImagen());
 		model.addAttribute("descripcion",montaje.getDescripcion());
 		List<Comentario> comentarios = repositoryComentario.findByMontaje(montaje);
 		model.addAttribute("comentarios",comentarios);
@@ -312,7 +316,7 @@ public class ControllerUsuario {
 		model.addAttribute("usuario.nombre",montaje.getUsuario().getNombre());
 		model.addAttribute("id",id);
 		model.addAttribute("titulo",montaje.getTitulo());
-		model.addAttribute("imagen",montaje.getImagen());
+		model.addAttribute("Imagen", montaje.getImagen());
 		model.addAttribute("descripcion",montaje.getDescripcion());
 		List<Comentario> comentarios = repositoryComentario.findByMontaje(montaje);
 		model.addAttribute("comentarios",comentarios);
