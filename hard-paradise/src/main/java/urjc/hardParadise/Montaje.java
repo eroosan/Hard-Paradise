@@ -1,7 +1,5 @@
 package urjc.hardParadise;
 
-import java.awt.Image;
-import java.sql.Blob;
 import java.util.List;
 
 import javax.persistence.*;
