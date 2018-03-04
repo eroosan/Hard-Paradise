@@ -4,6 +4,7 @@ package urjc.hardParadise.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ import urjc.hardParadise.repositories.ComentarioRepository;
 import urjc.hardParadise.repositories.FavoritoRepository;
 import urjc.hardParadise.repositories.MontajeRepository;
 import urjc.hardParadise.repositories.NoticiaRepository;
-import urjc.hardParadise.repositories.Usuariorepository;
+import urjc.hardParadise.repositories.UsuarioRepository;
 import urjc.hardParadise.repositories.ValoracionRepository;
 
 
@@ -34,7 +35,7 @@ import urjc.hardParadise.repositories.ValoracionRepository;
 public class ControllerWeb {
 	
 	@Autowired
-	private Usuariorepository repositoryUsuario;
+	private UsuarioRepository repositoryUsuario;
 	
 	@Autowired
 	private MontajeRepository repositoryMontaje;
@@ -97,23 +98,21 @@ public class ControllerWeb {
 		return "montaje";
 	}
 	
-	@PostMapping("/inicioSesion")
-	public String iniciarSesion(Model model, @RequestParam String nombre, @RequestParam String contraseña,HttpSession sesion ) {
-		
-		Usuario U1=repositoryUsuario.findOne(nombre);
-		
-		if(U1 != null && contraseña.equals(U1.getContraseña()))
-		{
-			sesion.setAttribute("Usuario", U1);
-			model.addAttribute("nombre",U1.getNombre());
-			return "inicioSesion";
-		}
-		else
-		{
-			return "inicio_error";
-		}
+	@RequestMapping("/inicio_sesion")
+	public String iniciarSesion()
+	{
+			return "inicio_sesion";
 	}
-	
+	@RequestMapping("/registro")
+	public String registro()
+	{
+		return "registro";
+	}
+	@GetMapping("/inicio_error")
+	public String inicioError()
+	{
+		return "inicio_error";
+	}
 	@GetMapping("verFavoritos")
 	public String verFavoritos(Model model,HttpSession sesion)
 	{
@@ -131,11 +130,14 @@ public class ControllerWeb {
 	}
 	
 	@GetMapping("/noticias")
-	public String paginaNoticias(Model model,HttpSession sesion ) {
+	public String paginaNoticias(Model model,HttpSession sesion,HttpServletRequest request ) {
+		
 		model.addAttribute("noticias",repositoryNoticia.findAll());
+		model.addAttribute("admin", request.isUserInRole("ADMIN"));
 		
 		return "noticias";
 	}
+
 	
 	@GetMapping("/verPerfilInvitado")
 	public String verPerfilInvitado (Model model, @RequestParam String id, HttpSession sesion)
@@ -145,5 +147,11 @@ public class ControllerWeb {
 		List<Montaje> montajes = repositoryMontaje.findByUsuario(usuario);
 		model.addAttribute("builds",montajes);
 		return "verPerfilInvitado";
+	}
+	
+	@GetMapping("/crear_noticia")
+	public String crearNoticia(Model model)
+	{
+		return "crear_noticia";
 	}
 }

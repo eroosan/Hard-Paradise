@@ -17,7 +17,7 @@ import urjc.hardParadise.Usuario;
 import urjc.hardParadise.Valoracion;
 import urjc.hardParadise.repositories.ComentarioRepository;
 import urjc.hardParadise.repositories.MontajeRepository;
-import urjc.hardParadise.repositories.Usuariorepository;
+import urjc.hardParadise.repositories.UsuarioRepository;
 import urjc.hardParadise.repositories.ValoracionRepository;
 
 
@@ -26,7 +26,7 @@ import urjc.hardParadise.repositories.ValoracionRepository;
 public class ControllerUsuario {
 	
 	@Autowired
-	private Usuariorepository repositoryUsuario;
+	private UsuarioRepository repositoryUsuario;
 	
 	@Autowired
 	private MontajeRepository repositoryMontaje;
@@ -42,12 +42,12 @@ public class ControllerUsuario {
 	public String guardarAnuncio(Model model, @RequestParam String nombre, @RequestParam String contraseña,
 			@RequestParam String correo) {
 
-		repositoryUsuario.save(new Usuario(nombre,contraseña,correo));
-		
+		repositoryUsuario.save(new Usuario(nombre,contraseña,correo,"USUARIO"));
+		/*
 		model.addAttribute("nombre", nombre);
-		model.addAttribute("correo",correo);
-
-		return "verPerfil";
+		model.addAttribute("correo",correo);*/
+		
+		return "noticias";
 	}
 	
 	@PostMapping("/seguirUsuario")

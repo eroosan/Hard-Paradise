@@ -57,7 +57,7 @@
         </div>
         <!-- /.container -->
     </nav>
-
+    
     <!-- Page Content -->
     <div class="container">
 
@@ -81,11 +81,13 @@
             </div>
         </div>
         <hr>
-        <a href="crear_noticia.html">Nueva noticia</a>
-        
+        {{#admin}}
+			        <a href="/crear_noticia">Nueva noticia</a>
+		{{/admin}}
+
     </div>
     <!-- /.container -->
-	
+    
 	<!-- jQuery -->
     <script src="js/jquery.js"></script>
 
