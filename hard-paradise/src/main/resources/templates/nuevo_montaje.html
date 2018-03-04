@@ -39,13 +39,16 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuario <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="inicio_sesion.html">Iniciar sesión</a>
+                                <a href="inicio_sesion">Iniciar sesión</a>
                             </li>
                             <li>
-                                <a href="registro.html">Registrarse</a>
+                                <a href="registro">Registrarse</a>
                             </li>
                             <li>
                                 <a href="/verPerfil">Perfil</a>
+                            </li>
+                             <li>
+                                <a href="/logOut">Log Out</a>
                             </li>
                         </ul>
                     </li>
@@ -64,34 +67,30 @@
         <!-- Page Heading/Breadcrumbs -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Registro
-                   
+                <h1 class="page-header">Builds
                 </h1>
             </div>
-        </div>
-		<div class="row">	
-		 	<form action="guardarusuario" method="post">
-	 		<p>Nombre: </p>
-	 		<input type='text' name='nombre'/>
-	 		<p>Contraseña:</p>
-	 		<input type='password' name='contraseña'/>
-	 		<p>Correo:</p>
-	 		<input name='correo' rows=5 cols=40></textarea>
-	 
-	 		<input type='submit' value='Enviar'/>
-	 	</form>
+            <div class="row">	
+	 		<form method="post" action="guardarMontaje" enctype="multipart/form-data">
+	 			<p>Titulo</p>
+	 			<input type="text" name="titulo">
+				<p>Descripcion:</p>
+				<input type="text" name="descripcion"/>
+				<p>Imagen:</p>
+				<input type="file" name="imagen"/>
+				<input type="submit" value="Subir montaje"/>
+			</form>
 	 	</div>
+            
+        </div>
+        
     </div>
-    
     <!-- /.container -->
-    <!-- /.ENTRE ESTOS COMENTARIOS HAY QUE AÑADIR LO QUE VAYAMOS A USAR-->
-		
-	<!-- /.ENTRE ESTOS COMENTARIOS HAY QUE AÑADIR LO QUE VAYAMOS A USAR-->
-		<!-- jQuery -->
+	
+	<!-- jQuery -->
     <script src="js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
-

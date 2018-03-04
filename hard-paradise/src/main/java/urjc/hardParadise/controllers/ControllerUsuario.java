@@ -3,6 +3,7 @@ package urjc.hardParadise.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import urjc.hardParadise.Usuario;
 import urjc.hardParadise.Valoracion;
 import urjc.hardParadise.repositories.ComentarioRepository;
 import urjc.hardParadise.repositories.MontajeRepository;
-import urjc.hardParadise.repositories.Usuariorepository;
+import urjc.hardParadise.repositories.UsuarioRepository;
 import urjc.hardParadise.repositories.ValoracionRepository;
 
 
@@ -26,7 +27,7 @@ import urjc.hardParadise.repositories.ValoracionRepository;
 public class ControllerUsuario {
 	
 	@Autowired
-	private Usuariorepository repositoryUsuario;
+	private UsuarioRepository repositoryUsuario;
 	
 	@Autowired
 	private MontajeRepository repositoryMontaje;
@@ -40,14 +41,14 @@ public class ControllerUsuario {
 	
 	@PostMapping("/guardarusuario")
 	public String guardarAnuncio(Model model, @RequestParam String nombre, @RequestParam String contraseña,
-			@RequestParam String correo) {
+			@RequestParam String correo, HttpServletRequest request) {
 
-		repositoryUsuario.save(new Usuario(nombre,contraseña,correo));
+		repositoryUsuario.save(new Usuario(nombre,contraseña,correo,"USER"));
 		
-		model.addAttribute("nombre", nombre);
-		model.addAttribute("correo",correo);
-
-		return "verPerfil";
+		//wrequest.setAttribute("correo", correo);
+		//model.addAttribute("correo",correo);
+		
+		return "noticias";
 	}
 	
 	@PostMapping("/seguirUsuario")

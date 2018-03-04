@@ -1,8 +1,11 @@
 package urjc.hardParadise;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 @Entity
@@ -11,7 +14,7 @@ public class Usuario {
 	@Id
 	private String nombre;
 
-	private String contraseña;
+	private String passwordHash;
 	private String correo;
 	
 	@OneToMany(mappedBy="usuario")
@@ -23,16 +26,28 @@ public class Usuario {
 	@OneToMany(mappedBy="usuario")
 	private List<Favorito> favoritos;
 	
+	@ElementCollection(fetch= FetchType.EAGER)
+	private List<String> roles= new ArrayList<String>();
+	
 	
 	public Usuario() {
 		
 	}
-	public Usuario(String nombre, String contraseña, String correo) {
+	public Usuario(String nombre, String password, String correo, String rol) {
 		this.nombre = nombre;
-		this.contraseña = contraseña;
+		this.passwordHash = new BCryptPasswordEncoder().encode(password);
 		this.correo = correo;
+		this.roles.add(rol);
+		
 	}
-
+	public Usuario(String nombre, String password, String correo, String rol,String rol2) {
+		this.nombre = nombre;
+		this.passwordHash = new BCryptPasswordEncoder().encode(password);
+		this.correo = correo;
+		this.roles.add(rol);
+		this.roles.add(rol2);
+		
+	}
 
 	public String getNombre() {
 		return nombre;
@@ -43,11 +58,11 @@ public class Usuario {
 	}
 
 	public String getContraseña() {
-		return contraseña;
+		return passwordHash;
 	}
 
 	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+		this.passwordHash = contraseña;
 	}
 
 	public String getCorreo() {
@@ -78,6 +93,12 @@ public class Usuario {
 	public void añadirSeguido(Usuario usuario)
 	{
 		seguidos.add(usuario);
+	}
+	public List<String> getRoles() {
+		return roles;
+	}
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
 	}
 	
 	

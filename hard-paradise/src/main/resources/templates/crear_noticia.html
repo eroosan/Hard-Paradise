@@ -33,19 +33,22 @@
                         <a href="/noticias">Noticias</a>
                     </li>
                     <li>
-                        <a href="builds.html">Builds</a>
+                        <a href="builds">Builds</a>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuario <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="inicio_sesion.html">Iniciar sesión</a>
+                                <a href="inicio_sesion">Iniciar sesión</a>
                             </li>
                             <li>
-                                <a href="registro.html">Registrarse</a>
+                                <a href="registro">Registrarse</a>
                             </li>
                             <li>
                                 <a href="/verPerfil">Perfil</a>
+                            </li>
+                            <li>
+                                <a href="/logOut">Log Out</a>
                             </li>
                         </ul>
                     </li>
@@ -68,14 +71,11 @@
                 </h1>
             </div>
             <div class="row">	
-	 		<form method="post" action="guardarMontaje" enctype="multipart/form-data">
-	 			<p>Titulo</p>
-	 			<input type="text" name="titulo">
-				<p>Descripcion:</p>
-				<input type="text" name="descripcion"/>
-				<p>Imagen:</p>
-				<input type="file" name="imagen"/>
-				<input type="submit" value="Subir montaje"/>
+	 		<form method="post" action="guardarNoticia" >
+				<p>Noticia:</p>
+				<input type="text" name="noticia"/>
+
+				<input type="submit" value="Publicar noticia"/>
 			</form>
 	 	</div>
             
