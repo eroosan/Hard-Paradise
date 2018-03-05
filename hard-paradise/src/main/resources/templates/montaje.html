@@ -77,12 +77,17 @@
 				<hr>
 			 	<form action="/marcarFavorito?id={{id}}" method="post"> 
 				<input type='submit' value='Marcar como favorito'/>
+				<input type="hidden" name="_csrf" value="{{token}}"/>
 				</form>
 			  	<form action="/enviarValoracion?id={{id}}" method="post"> 
-				<p>{{valoracion}} de {{nVotos}} votos    <input type="number" min="0" max="10" name='valorar'> <input type="submit" value="Enviar"></p>
+				<p>{{valoracion}} de {{nVotos}} votos    
+				<input type="number" min="0" max="10" name='valorar'>
+				<input type="submit" value="Enviar"></p>
+				<input type="hidden" name="_csrf" value="{{token}}"/>
 				</form>
 				<form action="/seguirUsuario?id={{id}}" method="post">
 				<input type="submit" value="Seguir Usuario"/>
+				<input type="hidden" name="_csrf" value="{{token}}"/>
 				</form>
 				
 				<hr>
@@ -90,6 +95,7 @@
 					<p>Nuevo Comentario:</p>
 					<input type='text' name='textoComentario'>
 					<input type='submit' value='Enviar'/>
+					<input type="hidden" name="_csrf" value="{{token}}"/>
 				</form>
 				<hr>
 				{{#comentarios}}

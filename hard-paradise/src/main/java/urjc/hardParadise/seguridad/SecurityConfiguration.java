@@ -26,9 +26,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		 http.authorizeRequests().antMatchers("/noticias").permitAll();
 		 http.authorizeRequests().antMatchers("/inicio_error").permitAll();
 		 http.authorizeRequests().antMatchers("/guardarusuario").permitAll();
-		 http.authorizeRequests().antMatchers("/css/", "/font-awesome/","/fonts/", "/imagenes/", "/js/**").permitAll();
+		 http.authorizeRequests().antMatchers("/css/**", "/font-awesome/**","/fonts/**", "/imagenes/**", "/js/**").permitAll();
 		 // Private pages (all other pages)
-		// http.authorizeRequests().anyRequest().authenticated();
+		 http.authorizeRequests().anyRequest().authenticated();
 		 http.authorizeRequests().antMatchers("/crear_noticia").hasAnyRole("ADMIN");
 
 		 // Login form2
@@ -43,7 +43,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		 http.logout().logoutSuccessUrl("/noticias");
 	
 		 // Disable CSRF at the moment
-		 http.csrf().disable();
+		 //http.csrf().disable();
 	 }
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception

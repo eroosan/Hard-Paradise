@@ -54,11 +54,10 @@ public class ControllerWeb {
 	private ValoracionRepository repositoryValoracion;
 	
 	@GetMapping("/verPerfil")
-	public String verPerfil(Model model, HttpSession sesion) {
-
-			
-		Usuario usuario = (Usuario) sesion.getAttribute("Usuario");
-		model.addAttribute("nombre",usuario.getNombre());
+	public String verPerfil(Model model, HttpServletRequest request) {
+		System.out.println(request.getUserPrincipal().getName());			
+		model.addAttribute("nombre",request.getUserPrincipal().getName());
+		Usuario usuario  = repositoryUsuario.findByNombre(request.getUserPrincipal().getName());
 		model.addAttribute("correo",usuario.getCorreo());
 		
 		return "verPerfil";

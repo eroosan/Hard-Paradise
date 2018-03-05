@@ -74,8 +74,9 @@
 	 		<form method="post" action="guardarNoticia" >
 				<p>Noticia:</p>
 				<input type="text" name="noticia"/>
-
+	 			
 				<input type="submit" value="Publicar noticia"/>
+				<input type="hidden" name="_csrf" value="{{token}}"/>
 			</form>
 	 	</div>
             
