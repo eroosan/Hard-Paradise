@@ -48,7 +48,10 @@
                                 <a href="verPerfil">Perfil</a>
                             </li>
                             <li>
-                                <a href="/logOut">Log Out</a>
+                                <form action="/logout" method="post">
+                                    <input type="submit" value="LogOut" />
+                                    <input type="hidden" name="_csrf" value="{{token}}"/>
+                            </form>
                             </li>
                         </ul>
                     </li>

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 
 import urjc.hardParadise.Comentario;
 import urjc.hardParadise.Montaje;
@@ -47,6 +48,9 @@ public class ControllerUsuario {
 		
 		//wrequest.setAttribute("correo", correo);
 		//model.addAttribute("correo",correo);
+		RestTemplate rt=new RestTemplate();
+	    String url= "http://localhost:8080/envioCorreo?correo="+correo+"&nombre="+nombre;
+	    Boolean b=rt.getForObject(url, Boolean.class);
 		
 		return "noticias";
 	}
