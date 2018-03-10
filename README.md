@@ -62,6 +62,33 @@ Nos muestra nuestros datos de usuario, además de permitirnos ver los usuarios a
 
 ![alt text](https://github.com/SexyBuggy/Hard-Paradise/blob/master/Capturas/favoritos.png)
 
+**INTRUCCIONES DE DESPLIEGUE DE APLICACIÓN**
+
+Primero instalamos Java 8:
+sudo add-apt-repository ppa:openjdk-r/ppa
+sudo apt-get update
+sudo apt-get install openjdk-8-jre
+
+A continuación instalamos el servicio MYSQL:
+sudo apt-get update
+sudo apt-get install -y mysql-server
+
+Una vez terminado entramos en la consola de MYSQL y creamos la base de datos vacía que va a usar la aplicación web:
+sudo mysql -u root -p
+mysql>CREATE DATABASE test;
+mysql>exit
+
+Por último ejecutamos los jar necesarios en dos terminales. Solo hay que ir al directorio donde se encuentre el .jar y ejecutamos:
+sudo java -jar hardParadise-0.0.1-SNAPSHOT-jar
+sudo java -jar InternalService-0.0.1-SNAPSHOT-jar
+
+En caso de tener un error de acceso a la base de datos al ejecutar los .jar, deberemos antes ejecutar (esto es debido a problemas con los privilegios que dependen de la versión de Ubuntu que estemos usando):
+sudo mysql -u root -p
+mysql>USE mysql;
+mysql>SELECT User, Host, plugin FROM mysql.user;
+mysql>UPDATE user SET plugin='mysql_native_password' WHERE User='root';
+mysql>FLUSH PRIVILEGES;
+mysql>Exit
 
 **Miembros del equipo:**
 

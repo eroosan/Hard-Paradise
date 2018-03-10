@@ -1,4 +1,4 @@
-package com.example.daw;
+/*package com.example.daw;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,4 +13,4 @@ public class InternalServiceApplicationTests {
 	public void contextLoads() {
 	}
 
-}
+}*/
