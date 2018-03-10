@@ -164,4 +164,10 @@ public class ControllerWeb {
 		model.addAttribute("builds",montajes);
 		return "verPerfilInvitado";
 	}
+	
+	@GetMapping("/permiso_denegado")
+	public String permisoDenegado()
+	{
+		return"permiso_denegado";
+	}
 }

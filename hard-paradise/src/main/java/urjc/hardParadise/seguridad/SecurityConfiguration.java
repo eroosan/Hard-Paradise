@@ -28,8 +28,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		 http.authorizeRequests().antMatchers("/guardarusuario").permitAll();
 		 http.authorizeRequests().antMatchers("/css/**", "/font-awesome/**","/fonts/**", "/imagenes/**", "/js/**").permitAll();
 		 // Private pages (all other pages)
+		 http.authorizeRequests().antMatchers("/crear_noticia").hasAnyRole("ADMIN").and().exceptionHandling().accessDeniedPage("/permiso_denegado");
 		 http.authorizeRequests().anyRequest().authenticated();
-		 http.authorizeRequests().antMatchers("/crear_noticia").hasAnyRole("ADMIN");
+
 
 		 // Login form2
 		 http.formLogin().loginPage("/inicio_sesion");
