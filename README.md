@@ -1,6 +1,6 @@
 ﻿# Hard-Paradise
 
-El proyecto Hard-Paradise consiste en una aplicación web, que consistirá en subir fotos de tu ordenador de sobremesa, para que los demás usuarios puedan observar tu trabajo a la hora de montarlo y diseñarlo, así como valorar tu gusto y la elección de piezas que has realizado para el proyecto, además podrán dejar comentarios con su opinión. 
+El proyecto Hard-Paradise consiste en una aplicación web, que consistirá en subir fotos de tu ordenador de sobremesa, para que los demás usuarios puedan observar tu trabajo a la hora de montarlo y diseñarlo, así como valorar tu gusto y la elección de piezas que has realizado para el proyecto, además podrán dejar comentarios con su opinión. <br />
 Esta aplicación a su vez tendrá un top donde aparecerán los usuarios con mayor reputación por las valoraciones recibidas, y habrá otra sección donde salgan las últimas publicaciones en la aplicación, de esta manera todos los usuarios tendrán la posibilidad de ser vistos.
 
 *Parte publica*: El usuario podrá únicamente ver las noticias sin necesidad de registrarse.
@@ -29,7 +29,7 @@ Se llevará a cabo a través de un sistema de correos que avisará de notificaci
 
 ![alt text](https://github.com/SexyBuggy/Hard-Paradise/blob/master/Capturas/DiagramaNavegacion.png)
 
-**Modelo de datos UML **
+**Modelo de datos UML**
 
 ![alt text](https://github.com/SexyBuggy/Hard-Paradise/blob/master/Capturas/ModeloDatosUML.jpg)
 
@@ -64,31 +64,36 @@ Nos muestra nuestros datos de usuario, además de permitirnos ver los usuarios a
 
 **INTRUCCIONES DE DESPLIEGUE DE APLICACIÓN**
 
-Primero instalamos Java 8:
-sudo add-apt-repository ppa:openjdk-r/ppa
-sudo apt-get update
-sudo apt-get install openjdk-8-jre
+1. Primero instalamos Java 8:
 
-A continuación instalamos el servicio MYSQL:
-sudo apt-get update
-sudo apt-get install -y mysql-server
+   sudo add-apt-repository ppa:openjdk-r/ppa <br />
+   sudo apt-get update <br />
+   sudo apt-get install openjdk-8-jre <br />
 
-Una vez terminado entramos en la consola de MYSQL y creamos la base de datos vacía que va a usar la aplicación web:
-sudo mysql -u root -p
-mysql>CREATE DATABASE test;
-mysql>exit
+2. A continuación instalamos el servicio MYSQL:
 
-Por último ejecutamos los jar necesarios en dos terminales. Solo hay que ir al directorio donde se encuentre el .jar y ejecutamos:
-sudo java -jar hardParadise-0.0.1-SNAPSHOT-jar
-sudo java -jar InternalService-0.0.1-SNAPSHOT-jar
+   sudo apt-get update<br />
+   sudo apt-get install -y mysql-server <br />
 
-En caso de tener un error de acceso a la base de datos al ejecutar los .jar, deberemos antes ejecutar (esto es debido a problemas con los privilegios que dependen de la versión de Ubuntu que estemos usando):
-sudo mysql -u root -p
-mysql>USE mysql;
-mysql>SELECT User, Host, plugin FROM mysql.user;
-mysql>UPDATE user SET plugin='mysql_native_password' WHERE User='root';
-mysql>FLUSH PRIVILEGES;
-mysql>Exit
+3. Una vez terminado entramos en la consola de MYSQL y creamos la base de datos vacía que va a usar la aplicación web:
+
+   sudo mysql -u root -p <br />
+   mysql>CREATE DATABASE test; <br />
+   mysql>exit
+
+4. Por último ejecutamos los jar necesarios en dos terminales. Solo hay que ir al directorio donde se encuentre el .jar y ejecutamos:
+
+   sudo java -jar hardParadise-0.0.1-SNAPSHOT-jar <br />
+   sudo java -jar InternalService-0.0.1-SNAPSHOT-jar
+
+- En caso de tener un error de acceso a la base de datos al ejecutar los .jar, deberemos antes ejecutar (esto es debido a problemas con los privilegios que dependen de la versión de Ubuntu que estemos usando):
+
+  sudo mysql -u root -p <br />
+  mysql>USE mysql; <br />
+  mysql>SELECT User, Host, plugin FROM mysql.user; <br />
+  mysql>UPDATE user SET plugin='mysql_native_password' WHERE User='root'; <br />
+  mysql>FLUSH PRIVILEGES; <br />
+  mysql>Exit
 
 **Miembros del equipo:**
 
