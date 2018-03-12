@@ -27,7 +27,7 @@ Se llevará a cabo a través de un sistema de correos que avisará de notificaci
 
 **Modelo navegación web**
 
-![alt text](https://github.com/SexyBuggy/Hard-Paradise/blob/master/Capturas/DiagramaNavegacion.jgp)
+![alt text](https://github.com/SexyBuggy/Hard-Paradise/blob/master/Capturas/DiagramaNavegacion.jpg)
 
 **Modelo de datos UML**
 
@@ -54,10 +54,12 @@ Nos muestra una vista previa de cada Montaje publicado por los usuarios, permiti
 
 ![alt text](https://github.com/SexyBuggy/Hard-Paradise/blob/master/Capturas/builds.png)
 
-Una vez accedido a un montaje, tenemos la posibilidad de leer la descripcion completa,y dar una valoracion, asi como de ver y realizar comentarios.
-
+Una vez accedido a un montaje, tenemos la posibilidad de leer la descripcion completa,y dar una valoracion, asi como de ver y realizar comentarios, también nos indica el usuario que lo ha subido, asi como haciendo click en el, nos redirige a su perfil para visitarlo, donde se muestra sus montajes subidos.
 
 ![alt text](https://github.com/SexyBuggy/Hard-Paradise/blob/master/Capturas/montaje.jpg)
+
+
+![alt text](https://github.com/SexyBuggy/Hard-Paradise/blob/master/Capturas/perfilInvitado.jpg)
 
 Usuario:
 Nos muestra nuestros datos de usuario, además de permitirnos ver los usuarios a los que seguimos, permitiéndolos modificarlos, asi como acceder a un nuevo registro e inicio de sesion.
