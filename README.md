@@ -27,11 +27,16 @@ Se llevará a cabo a través de un sistema de correos que avisará de notificaci
 
 **Modelo navegación web**
 
-![alt text](https://github.com/SexyBuggy/Hard-Paradise/blob/master/Capturas/DiagramaNavegacion.png)
+![alt text](https://github.com/SexyBuggy/Hard-Paradise/blob/master/Capturas/DiagramaNavegacion.jgp)
 
 **Modelo de datos UML**
 
 ![alt text](https://github.com/SexyBuggy/Hard-Paradise/blob/master/Capturas/ModeloDatosUML.jpg)
+
+
+**Diagrama de clases UML**
+
+![alt text](https://github.com/SexyBuggy/Hard-Paradise/blob/master/Capturas/UML.png)
 
 
 **Capturas de pantalla**
@@ -52,7 +57,7 @@ Nos muestra una vista previa de cada Montaje publicado por los usuarios, permiti
 Una vez accedido a un montaje, tenemos la posibilidad de leer la descripcion completa,y dar una valoracion, asi como de ver y realizar comentarios.
 
 
-![alt text](https://github.com/SexyBuggy/Hard-Paradise/blob/master/Capturas/montaje.png)
+![alt text](https://github.com/SexyBuggy/Hard-Paradise/blob/master/Capturas/montaje.jpg)
 
 Usuario:
 Nos muestra nuestros datos de usuario, además de permitirnos ver los usuarios a los que seguimos, permitiéndolos modificarlos, asi como acceder a un nuevo registro e inicio de sesion.
@@ -61,6 +66,8 @@ Nos muestra nuestros datos de usuario, además de permitirnos ver los usuarios a
 
 
 ![alt text](https://github.com/SexyBuggy/Hard-Paradise/blob/master/Capturas/favoritos.png)
+
+
 
 **INTRUCCIONES DE DESPLIEGUE DE APLICACIÓN**
 

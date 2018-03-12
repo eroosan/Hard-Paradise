@@ -58,7 +58,7 @@ public class MailRestController {
 			msg.setSubject("Bienvenido a HardParadise");
 			msg.setText(
 					"Hola " + nombre
-							+ "\n\nTe damos la bienvenida a Hard paradise. Esperemos que disfrutes de las mejores builds del momento.\n\nUn saludo y u majestuoso saludo, y seguimos aprendiendo",
+							+ "\n\nTe damos la bienvenida a Hard paradise. Ya puedes comenzar a disfrutar de este paraíso para amantes del hardware y montajes customizados.\n\nUn cordial saludo del equipo de desarrollo.\n\nJulio Cabesetti, Jefe de departamento de redes sociales Hard-Paradise.",
 					"utf-8");
 			msg.setSentDate(new Date());
 
