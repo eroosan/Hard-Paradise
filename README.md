@@ -92,8 +92,8 @@ Nos muestra nuestros datos de usuario, además de permitirnos ver los usuarios a
 
 4. Por último ejecutamos los jar necesarios en dos terminales. Solo hay que ir al directorio donde se encuentre el .jar y ejecutamos:
 
-   sudo java -jar hardParadise-0.0.1-SNAPSHOT-jar <br />
-   sudo java -jar InternalService-0.0.1-SNAPSHOT-jar
+   sudo java -jar hardParadise-0.0.1-SNAPSHOT.jar <br />
+   sudo java -jar InternalService-0.0.1-SNAPSHOT.jar
 
 - En caso de tener un error de acceso a la base de datos al ejecutar los .jar, deberemos antes ejecutar (esto es debido a problemas con los privilegios que dependen de la versión de Ubuntu que estemos usando):
 
