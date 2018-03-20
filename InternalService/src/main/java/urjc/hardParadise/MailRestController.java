@@ -9,6 +9,7 @@ import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,12 +25,16 @@ import com.sun.mail.smtp.SMTPTransport;
 @RestController
 public class MailRestController {
 	
+	
+	@Value("${password}")
+	private String password;
+	
 	@CrossOrigin
 	@ResponseStatus(HttpStatus.CREATED)
 	@RequestMapping(value = "/envioCorreo", method = RequestMethod.GET) 
 	public ResponseEntity<Boolean> sendMail(@RequestParam String correo, @RequestParam String nombre) {
 		
-
+		
 		
 		try {
 
@@ -64,7 +69,7 @@ public class MailRestController {
 
 			SMTPTransport t = (SMTPTransport) session.getTransport("smtps");
 
-			t.connect("smtp.gmail.com", "hardparadise.welcome@gmail.com", "Hardparadise1");
+			t.connect("smtp.gmail.com", "hardparadise.welcome@gmail.com", password);
 			t.sendMessage(msg,	 msg.getAllRecipients());
 			t.close();
 
