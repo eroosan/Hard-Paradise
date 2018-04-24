@@ -2,6 +2,8 @@ package urjc.hardParadise;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Comentario {
 	
@@ -11,8 +13,10 @@ public class Comentario {
 	
 	private String textoComentario;
 	
+	@JsonIgnore
 	@ManyToOne
 	private Usuario usuario;
+	
 	
 	@ManyToOne
 	private Montaje montaje;

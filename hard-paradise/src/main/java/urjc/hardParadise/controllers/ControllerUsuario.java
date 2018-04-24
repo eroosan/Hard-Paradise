@@ -49,7 +49,7 @@ public class ControllerUsuario {
 		//wrequest.setAttribute("correo", correo);
 		//model.addAttribute("correo",correo);
 		RestTemplate rt=new RestTemplate();
-	    String url= "http://localhost:8080/envioCorreo?correo="+correo+"&nombre="+nombre;
+	    String url= "http://192.168.33.13:8080/envioCorreo?correo="+correo+"&nombre="+nombre;
 	    Boolean b=rt.getForObject(url, Boolean.class);
 		
 		return "noticias";

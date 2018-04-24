@@ -8,6 +8,8 @@ import javax.persistence.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.context.annotation.SessionScope;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @SessionScope
@@ -19,9 +21,11 @@ public class Usuario {
 	private String passwordHash;
 	private String correo;
 	
+
 	@OneToMany(mappedBy="usuario")
 	private List<Montaje> montajes;
 	
+
 	@ManyToMany
 	private List<Usuario> seguidos;
 	

@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Montaje {
@@ -17,12 +19,13 @@ public class Montaje {
 	private String imagen;
 	private Double valoracion;
 	
+	@JsonIgnore
 	@ManyToOne
 	private Usuario usuario;
 	
 	
 
-
+	@JsonIgnore
 	@OneToMany(mappedBy="montaje")
 	private List<Comentario> comentarios;
 	
