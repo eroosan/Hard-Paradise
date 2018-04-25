@@ -69,6 +69,17 @@ Nos muestra nuestros datos de usuario, además de permitirnos ver los usuarios a
 
 ![alt text](https://github.com/SexyBuggy/Hard-Paradise/blob/master/Capturas/favoritos.png)
 
+**Funcionamiento servicio interno**
+
+El servicio interno se comunica a través API REST con la  aplicación web, y este usa la API de gmail para enviar el correo correspondiente al usuario cuando se registra.
+
+**Diagrama de infraestructura**
+
+![alt text](https://github.com/SexyBuggy/Hard-Paradise/blob/master/Capturas/infraestructura.jpg)
+
+
+**Video explicativo de funcionamiento**
+
 
 
 **INTRUCCIONES DE DESPLIEGUE DE APLICACIÓN**
