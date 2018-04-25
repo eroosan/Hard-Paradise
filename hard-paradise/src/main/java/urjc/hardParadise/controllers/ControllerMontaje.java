@@ -93,12 +93,10 @@ public class ControllerMontaje {
 		int votos=0;
 		double valoracionMedia=0;
 		Montaje montaje = repositoryMontaje.findOne(id);
-		if(sesion.getAttribute("Usuario")!= null)	
-		{
-			Valoracion valoracion = new Valoracion(valorar);
+		Valoracion valoracion = new Valoracion(valorar);
 			valoracion.setMontaje(montaje);
 			repositoryValoracion.save(valoracion);
-		}
+		
 		model.addAttribute("nombre",montaje.getUsuario().getNombre());
 		model.addAttribute("id",id);
 		model.addAttribute("titulo",montaje.getTitulo());
@@ -110,10 +108,10 @@ public class ControllerMontaje {
 		List<Valoracion> valoraciones = repositoryValoracion.findByMontaje(montaje);
 		if(!valoraciones.isEmpty() )
 		{
-			for(Valoracion valoracion:valoraciones)
+			for(Valoracion valoracionF:valoraciones)
 			{
 				votos++;
-				valoracionMedia += valoracion.getValoracion();
+				valoracionMedia += valoracionF.getValoracion();
 			}
 			valoracionMedia = valoracionMedia/votos;
 		}

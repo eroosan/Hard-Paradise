@@ -42,13 +42,12 @@ public class ControllerFavorito {
 		double valoracionMedia=0;
 
 		Montaje montaje = repositoryMontaje.findOne(id);
-		if(sesion.getAttribute("Usuario")!= null)	
-		{
+		
 			Favorito favorito = new Favorito();
 			favorito.setUsuario((Usuario) sesion.getAttribute("Usuario"));
 			favorito.setMontaje(montaje);
 			repositoryFavorito.save(favorito);
-		}
+		
 		model.addAttribute("nombre",montaje.getUsuario().getNombre());
 		model.addAttribute("usuario.nombre",montaje.getUsuario().getNombre());
 		model.addAttribute("id",id);

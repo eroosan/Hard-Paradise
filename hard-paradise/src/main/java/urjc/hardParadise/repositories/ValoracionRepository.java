@@ -2,12 +2,15 @@ package urjc.hardParadise.repositories;
 
 import java.util.List;
 
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import urjc.hardParadise.Montaje;
 import urjc.hardParadise.Valoracion;
 
+
+@CacheConfig(cacheNames = "test")
 public interface ValoracionRepository extends JpaRepository<Valoracion, Long>{
 	
 	List<Valoracion> findByMontaje(Montaje id);

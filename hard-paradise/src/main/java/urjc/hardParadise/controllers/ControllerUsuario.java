@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,21 +57,20 @@ public class ControllerUsuario {
 	}
 	
 	@PostMapping("/seguirUsuario")
-	public String seguirUsuario(Model model, @RequestParam long id,HttpSession sesion)
+	public String seguirUsuario(Model model, @RequestParam long id,HttpSession sesion,Authentication authentication)
 	{
 		int votos=0;
 		double valoracionMedia=0;
 		
 		Montaje montaje = repositoryMontaje.findOne(id);
-		Usuario usuariopropio = (Usuario) sesion.getAttribute("Usuario");
-		if(sesion.getAttribute("Usuario")!= null)	
-		{
+		Usuario usuariopropio = repositoryUsuario.findByNombre(authentication.getName());
+		
 			Usuario usuario = montaje.getUsuario();
 			List<Usuario> seguidos = repositoryUsuario.findBySeguidos(usuariopropio);
 			seguidos.add(usuario);
 			usuariopropio.setSeguidos(seguidos);
 			repositoryUsuario.save(usuariopropio);
-		}
+		
 		model.addAttribute("nombre",montaje.getUsuario().getNombre());
 		model.addAttribute("usuario.nombre",montaje.getUsuario().getNombre());
 		model.addAttribute("id",id);
