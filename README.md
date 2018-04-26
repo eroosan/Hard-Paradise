@@ -80,7 +80,7 @@ El servicio interno se comunica a través API REST con la  aplicación web, y es
 
 **Video explicativo de funcionamiento**
 
-
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/-dOdER8_nEE/0.jpg)](https://www.youtube.com/watch?v=-dOdER8_nEE)
 
 **INTRUCCIONES DE DESPLIEGUE DE APLICACIÓN**
 
