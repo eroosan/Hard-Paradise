@@ -1,0 +1,79 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-service
+  labels:
+    app: robertoeduardosantanaleon
+spec:
+  type: NodePort
+  ports:
+    - port: 8443
+      targetPort: 8443
+      nodePort: 30001
+  selector:
+      app: robertoeduardosantanaleon
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-depl
+  labels:
+    app: robertoeduardosantanaleon
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: robertoeduardosantanaleon
+  template:
+    metadata:
+      labels:
+        app: robertoeduardosantanaleon
+    spec:
+      containers:
+        - name: hardparadise
+          image: eroosan/hardparadise:v3
+          ports:
+            - containerPort: 8443
+        - name: internal
+          image: eroosan/internalservice:v4
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql-server
+  labels:
+    app: robertoeduardosantanaleon
+spec:
+  containers:
+    - name: mysql-server
+      image: mysql/mysql-server
+      env: 
+        - name: MYSQL_ROOT_PASSWORD
+          value: secret
+        - name: MYSQL_DATABASE
+          value: test
+      ports:
+        - containerPort: 3806
+      volumeMounts:
+        - mountPath: "/var/lib/mysql"
+          name: mysql-persistent-storage
+  volumes:
+    - name: mysql-persistent-storage
+      persistentVolumeClaim:
+        claimName: mysql-pv-claim
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pv-claim
+  labels:
+    app: robertoeduardosantanaleon
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
