@@ -40,29 +40,56 @@ spec:
             - containerPort: 8080
 ---
 apiVersion: v1
-kind: Pod
+kind: Service
 metadata:
   name: mysql-server
   labels:
     app: robertoeduardosantanaleon
 spec:
-  containers:
-    - name: mysql-server
-      image: mysql/mysql-server
-      env: 
-        - name: MYSQL_ROOT_PASSWORD
-          value: secret
-        - name: MYSQL_DATABASE
-          value: test
-      ports:
-        - containerPort: 3806
-      volumeMounts:
-        - mountPath: "/var/lib/mysql"
-          name: mysql-persistent-storage
-  volumes:
-    - name: mysql-persistent-storage
-      persistentVolumeClaim:
-        claimName: mysql-pv-claim
+  ports:
+    - port: 3306
+  selector:
+    app: robertoeduardosantanaleon
+    tier: mysql
+  clusterIP: None
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-server
+  labels:
+    app: robertoeduardosantanaleon
+spec:
+  selector:
+    matchLabels:
+      app: robertoeduardosantanaleon
+      tier: mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: robertoeduardosantanaleon
+        tier: mysql
+    spec:
+      containers:
+      - image: mysql/mysql-server
+        name: mysql-server
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            value: secret
+          - name: MYSQL_DATABASE
+            value: test
+        ports:
+        - containerPort: 3306
+          name: mysql-server
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: mysql-pv-claim
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
